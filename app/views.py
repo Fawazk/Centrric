@@ -13,16 +13,14 @@ class Register(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        if request.data:
-            serializer = UserSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
             serializer.validate_password(request.data['password'])
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.validated_data)
-            else:
-                return Response(serializer.errors)
+            serializer.save()
+            return Response(serializer.validated_data)
         else:
-            return Response(status=400)
+            return Response(serializer.errors)
+        
 
 # To follow
 class UserFollowViews(generics.CreateAPIView):

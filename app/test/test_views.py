@@ -43,25 +43,25 @@ class TestView(TestSetUp):
         # pdb.set_trace()
         self.assertEqual(res.status_code,200)
 
-    # def test_can_getfollowing(self):
-    #     accesstoken = self.test_user_can_login()
-    #     self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
-    #     res= self.client.get(self.getfollowing_url)
-    #     self.assertEqual(res.status_code,200)
+    def test_can_getfollowing(self):
+        accesstoken = self.test_user_can_login()
+        self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
+        res= self.client.get(self.getfollowing_url)
+        self.assertEqual(res.status_code,200)
     
-    # def test_can_getfollowers(self):
-    #     accesstoken = self.test_user_can_login()
-    #     self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
-    #     res= self.client.get(self.getfollowers_url)
-    #     self.assertEqual(res.status_code,200)
+    def test_can_getfollowers(self):
+        accesstoken = self.test_user_can_login()
+        self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
+        res= self.client.get(self.getfollowers_url)
+        self.assertEqual(res.status_code,200)
     
-    # def test_unfollow(self):
-    #     self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
-    #     res= self.client.delete(self.unfollow_url)
-    #     self.assertEqual(res.status_code,200)
+    def test_unfollow(self):
+        self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
+        res= self.client.delete(self.unfollow_url)
+        self.assertEqual(res.status_code,200)
 
-    # def test_can_get_user_details(self):
-    #     accesstoken = self.test_user_can_login()
-    #     self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
-    #     res= self.client.get(self.userdetails_url)
-    #     self.assertEqual(res.status_code,200)
+    def test_can_get_user_details(self):
+        accesstoken = self.test_user_can_login()
+        self.client.credentials(HTTP_AUTHORIZATION="Token "+accesstoken)
+        res= self.client.get(self.userdetails_url)
+        self.assertEqual(res.status_code,200)
