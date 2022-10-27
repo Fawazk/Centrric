@@ -5,18 +5,24 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from . serializers import UserSerializer, UserFollowSerializer,UserDetailsSerializer
 from .models import Account, UserFollow
+from rest_framework import status
+
 
 
 class Register(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.validated_data)
+        if request.data:
+            serializer = UserSerializer(data=request.data)
+            serializer.validate_password(request.data['password'])
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.validated_data)
+            else:
+                return Response(serializer.errors)
         else:
-            return Response(serializer.errors)
+            return Response(status=400)
 
 # To follow
 class UserFollowViews(generics.CreateAPIView):
